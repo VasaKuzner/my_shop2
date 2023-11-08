@@ -1,0 +1,121 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="kat"><a href="{{ product.category.get_absolute_url }}"> Категорія {{ product.category }} </a></div>
+
+<div class="container-product-detail">
+
+        
+        <div class="product-images ">
+            <div class="thumbnails">
+
+
+                <a href="#" class="thumbnail"  ><img src="{{ product.picture2 }}" alt="{{ product.name }}">
+                <a href="#" class="thumbnail"  ><img src="{{ product.picture3 }}" alt="{{ product.name }}">
+                <a href="#" class="thumbnail"  ><img src="{{ product.picture4 }}" alt="{{ product.name }}">
+                <a href="#" class="thumbnail"  ><img src="{{ product.picture5 }}" alt="{{ product.name }}">
+
+                </a>
+
+        </div>
+        
+            <div class="main-image ">
+                <img src="{{ product.picture1 }}" alt="{{ product.name }}"
+                     id="mainImage">
+            </div>
+        
+        
+      </div>
+          
+        <div class="price-quantity ">
+            <h2 class="product-detail">{{ product.name }}</h2>
+
+        <hr>
+            <div class="all-param"></div>
+            <ul>
+
+                <lo class="product-brand"> <span> Країна Виробник  </span> - {{ product.country_of_manufacture }}  </lo>
+                <lo class="price"> <span> Ціна за одиницю товара  </span>  {{ product.price }} грн</lo>
+                <lo class="product-param-size">  Колір ---  {{ product.color }}</lo>
+
+
+
+                <lo class="product-code">код товару {{ product.available }} </lo>
+                <lo class="product-code">код товару {{ product.decoration }} </lo>
+                <lo class="product-code">код товару {{ product.length }} </lo>
+                <lo class="product-code">код товару {{ product.fastener }} </lo>
+                <lo class="product-code">код товару {{ product.fabric_type }} </lo>
+                <lo class="product-code">код товару {{ product.upper_material }} </lo>
+                <lo class="product-code">код товару {{ product.style }} </lo>
+                <lo class="product-code">код товару {{ product.cut_features }} </lo>
+            </ul>
+
+                <div class="form-price">
+
+
+                    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        {{ cart_product_form.quantity }}
+                         <select name="size" class="custom-select">
+                            {% for size in product.size %}
+                                <option value="{{ size }}">{{ size }}</option>
+                            {% endfor %}
+    </select>
+
+
+                                    <input class="form-price-botton"  type="submit" value="Придбати">
+                    </form>
+                </div>
+
+
+
+           <div class="delivery-payment" >
+                    <div class="delivery" > <h3>Доставка </h3>
+                        <li> Новою поштою по Україні</li>
+                        <li> Кур'єром по Києву </li>
+                        <li>Самовивіз: смт.Щирець, вул. Острівськ, </li>
+
+                    </div >
+                    <div class="payment" > <h3>Оплата </h3>
+                        <li>Готівкою при самовивозі</li>
+                        <li>Оплата на картку ПриватБанку</li>
+                        <li>На розрахунковий рахунок ФОП (безготівковий розрахунок)</li>
+                        <li>Накладеним платежем (передоплата від 150 грн)</li>
+                       <li> <a href="/" > Більше інформації про доставку</a> </li>
+
+                    </div>
+                </div>
+
+        </div>
+
+
+    </div>
+
+
+
+        <div class="product-description">
+                
+            <h1>{{ product.name }} </h1>
+<!--            <p>    {{ product.description|striptags }}</p>-->
+             {% autoescape off %}
+    <p>{{ product.description }}</p>
+    {% endautoescape %}
+        </div> 
+        <script>
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainImage = document.getElementById('mainImage');
+    
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', (event) => {
+                    event.preventDefault(); // Зупинити стандартну дію посилання
+                    mainImage.src = thumbnail.querySelector('img').src;
+                    mainImage.alt = thumbnail.querySelector('img').alt;
+                });
+            });
+        </script>
+{% endblock %}

@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  redis:
+    restart: always
+    image: redis
+
+  web:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/user/src/shopp
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - redis
+    links:
+      - redis
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/user/src/shopp
+    command: celery -A myshop worker -l info
+    depends_on:
+      - redis
+      - web
+    links:
+      - redis
+      - web
+
+  flower: # Доданий сервіс для Flower
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5555:5555"  # Змінений порт, який слід використовувати для доступу до Flower
+    volumes:
+      - .:/user/src/shopp
+    command: celery -A myshop flower --broker=redis://redis:6379/0  # Запуск Flower
+    depends_on:
+      - redis
+      - web
+    links:
+      - redis
+      - web

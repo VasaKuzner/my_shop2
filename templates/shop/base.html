@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My shop{% endblock %}</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <script src="{% static 'js/serch.js' %}"></script>
+<!--     <script  src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+
+</head>
+<body>
+<header>
+    <div class="header">
+        <div class="heder-main">
+            <li><a href="/"><img src="/static/images/600.jpg" alt="Логотип"></a></li>
+            <li><a href="/">Головна</a></li>
+            <li><a href="#news">Новини</a></li>
+            <li><a href="#contact">Контакти</a></li>
+        </div>
+        <div class="register">
+            {% if request.user.is_authenticated %}
+            <li class="register_2"> Привіт: {{ user.username }}</li>
+            <li><a href="{% url 'users:logout_user' %}">Вийти</a></li>
+            {% else %}
+            <li><a class="active" href="{% url 'users:login' %}">Увійти </a></li>
+            <li><a class="active" href="{% url 'users:register' %}">Реєстрація </a></li>
+
+
+            {% endif %}
+        </div>
+    </div>
+
+</header>
+<div id="subheader">
+
+    {% with total_items=cart|length %}
+    {% if cart|length > 0 %}
+
+    <a href="{% url 'cart:cart_detail' %}" style="text-decoration: none;">
+        <!--                    {{ total_items }}-->  Корзина:
+        {{ cart.get_total_price }} грн
+    </a>
+    {% else %}
+    <span class="empty-message">Твоя корзина пуста.</span>
+    {% endif %}
+    {% endwith %}
+
+</div>
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+
+
+</div>
+
+
+<footer>
+
+
+    <div class="footer-container">
+
+        <div class="z2-footer-wrapper">
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Про компанію</div>
+                <div><a href="{% url 'shop:about' %}">Про нас </a></div>
+<!--                <div><a href="about/postavshhikam/">Постачальникам</a></div>-->
+<!--                <div><a href="charity/">Благодійність</a></div>-->
+                <div><a href="{% url 'shop:contacts' %}">Написати директору</a></div>
+                <div>
+                    <div class="z2-g-m-r">
+                        <div id="___ratingbadge_0"
+                             style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 165px; height: 54px;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Інформація</div>
+                <div><a href="{% url 'shop:delivery_payment' %}">Оплата та доставка</a></div>
+                <div><a href="{% url 'shop:exchange' %}">Повернення товарів</a></div>
+
+
+                <div><a href="{% url 'shop:policy' %}">Політика конфіденційності</a></div>
+                <div><a href="{% url 'shop:term_of_use' %}">Умови використання</a></div>
+<!--                <div><a href="brand/">Представлені бренди</a></div>-->
+<!--                <div><a href="html-map/">Мапа сайту</a></div>-->
+            </div>
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Контакти</div>
+                <div >
+                    <meta itemprop="name" content="Pethouse">
+
+                    <div><span itemprop="telephone">+380 (97) 32 33 268</span></div>
+
+                    <div><a href="#"><span itemprop="email">vasakuzner@com.ua</span></a>
+                    </div>
+                </div>
+
+                <div class="ph-bubble-items">
+                    <a href="#" rel="nofollow" target="_blank"><img
+                            src="/static/images/fb35.png" alt="facebook"></a>
+                    <a href="#" rel="nofollow" target="_blank"><img
+                            src="/static/images/ph-youtube.png" alt="youtube"></a>
+                    <a href="#" rel="nofollow" target="_blank"><img
+                            src="/static/images/instagram.png" alt="instagram"></a>
+                </div>
+                
+            </div>
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Приймаємо</div>
+                <div class="ph-bubble-items pservice">
+                    <div style="display:inline-block;"><img src="/static/images/v24.png" alt="visa">
+                    </div>
+                    <div style="display:inline-block;"><img src="/static/images/mc24.png"
+                                                            alt="mastercard"></div>
+
+                    <div style="display:inline-block;"><img src="/static/images/pr24.png"
+                                                            alt="private24"></div>
+                    <br>
+                    
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="z2-footer-btn">
+            © 2010 - 2023 Інтернет-магазин Кузнер василь<br>
+            Всі права захищені. Передрук, відтворення та використання матеріалів дозволяється лише за умови посилання на
+
+
+        </div>
+
+    </div>
+</footer>
+
+
+</body>
+</html>

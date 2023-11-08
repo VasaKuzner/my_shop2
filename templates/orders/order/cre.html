@@ -1,0 +1,43 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+    <h1>Checkout</h1>
+<h3>Твої замовлення </h3>
+    <div class="order-info">
+
+        <ul>
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>${{ item.total_price }}</span>
+                </li>
+            {% endfor %}
+             <li>Total: ${{ cart.get_total_price }}</li>
+        </ul>
+
+    </div>
+    <form action="." method="post" class="order-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" name="submit" value="відправити замовлення "></p>
+
+    </form>
+ <!-- Виведення адрес і номерів відділень "Нової Пошти" -->
+       <h1>Пошук адрес</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Пошук">
+    </form>
+
+    {% if results %}
+    <h2>Результати пошуку:</h2>
+    <ul>
+        {% for result in results %}
+        <li>{{ result.MainDescription }} ({{ result.Area }}, {{ result.Region }})</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+<div class='main-content'  >
+    <div id="sidebar">
+        <h3>Катерогії </h3>
+        {% for category, products in products_by_category.items %}
+        <ul>
+
+                <li >
+                    <a href="#">{{ category }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <h1>Всі категорії </h1>
+
+
+{% for category, products in products_by_category.items %}
+    <h2>{{ category }}</h2>
+    <ul>
+        {% for product in products %}
+            <!-- Display only the first 20 products -->
+            {% if forloop.counter <= 20 %}
+                <li>
+                    <h3>{{ product.name }}</h3>
+<!--                    <p>{{ product.description }}</p>-->
+<!--                    <p>Price: {{ product.price }}</p>-->
+<!--                    <p> {{ product.param }}</p>-->
+                    <p> {{ product.category }}</p>
+<!--                    <p> {{ product.param1 }}</p>-->
+<!--                    <ul>-->
+<!--                        {% for param in product.params %}-->
+<!--                            <li>{{ param }}</li>-->
+<!--                        {% endfor %}-->
+<!--                    </ul>-->
+<!--                    <p> {{ product.old_price }}</p>-->
+                    <p> {{ product.vendor }}</p>
+                    {% if product.image %}
+                        <img src="{{ product.image }}" alt="{{ product.name }}">
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endfor %}
+</div>
+{% endblock %}

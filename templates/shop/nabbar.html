@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My shop{% endblock %}</title>
+<!--    <link href="{% static 'css/base.css' %}" rel="stylesheet">-->
+
+</head>
+<body>
+
+
+<footer>
+    <div class="container">
+
+        <div class="z2-footer-wrapper">
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Про компанію</div>
+                <div><a href="about/">Компанія</a></div>
+                <div><a href="about/team/">Кар'єра</a></div>
+                <div><a href="about/postavshhikam/">Постачальникам</a></div>
+                <div><a href="charity/">Благодійність</a></div>
+                <div><a href="about/messagetoceo/">Написати директору</a></div>
+                <div>
+                    <div class="z2-g-m-r">
+                        <div id="___ratingbadge_0"
+                             style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 165px; height: 54px;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Інформація</div>
+                <div><a href="about/oplata-i-dostavka/">Оплата та доставка</a></div>
+                <div><a href="about/returns/">Повернення товарів</a></div>
+
+                <div><a href="about/offer/">Публічна оферта</a></div>
+                <div><a href="policy/">Політика конфіденційності</a></div>
+                <div><a href="usloviya_ispolzovaniya/">Умови використання</a></div>
+                <div><a href="brand/">Представлені бренди</a></div>
+                <div><a href="html-map/">Мапа сайту</a></div>
+            </div>
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Контакти</div>
+                <div itemscope="" itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Pethouse">
+                    <div><span itemprop="telephone">0-800-800-250</span></div>
+                    <div><span itemprop="telephone">+380 (44) 300-01-02</span></div>
+
+                    <div><a href="mailto:welcome@pethouse.ua"><span itemprop="email">welcome@pethouse.ua</span></a>
+                    </div>
+                </div>
+
+                <div class="ph-bubble-items">
+                    <a href="https://www.facebook.com/pethouse.ua" rel="nofollow" target="_blank"><img
+                            src="/assets/templates/petshop/images/fb35.png" alt="facebook"></a>
+                    <a href="https://www.youtube.com/pethouseua" rel="nofollow" target="_blank"><img
+                            src="/assets/images/social/ph-youtube.png" alt="youtube"></a>
+                    <a href="https://www.instagram.com/pethouse.ua/" rel="nofollow" target="_blank"><img
+                            src="/assets/templates/petshop/images/instagram.png" alt="instagram"></a>
+                </div>
+                <div class="ph-bubble-items">
+                    <a href="https://apps.apple.com/ua/app/pethouse/id1584332149?l=uk" rel="nofollow"
+                       target="_blank"><img width="150" src="/assets/templates/zoog2/images/appstore.jpg"
+                                            alt="Pethouse App"></a><br>
+                    <a href="https://play.google.com/store/apps/details?id=development.icecream.pethouse" rel="nofollow"
+                       target="_blank"><img width="150" src="/assets/templates/zoog2/images/googleplay.jpg"
+                                            alt="Pethouse App"></a>
+
+                </div>
+            </div>
+            <div class="z2-footer-col">
+                <div class="z2-footer-bold">Приймаємо</div>
+                <div class="ph-bubble-items pservice">
+                    <div style="display:inline-block;"><img src="/assets/templates/zoog2/images/v24.png" alt="visa">
+                    </div>
+                    <div style="display:inline-block;"><img src="/assets/templates/zoog2/images/mc24.png"
+                                                            alt="mastercard"></div>
+
+                    <div style="display:inline-block;"><img src="/assets/templates/zoog2/images/pr24.png"
+                                                            alt="private24"></div>
+                    <br>
+                    <div style="display:inline-block;"><img src="/assets/templates/zoog2/images/apple-pay.png"
+                                                            alt="apple pay"></div>
+
+                    <div style="display:inline-block;"><img src="/assets/templates/zoog2/images/google-pay.png"
+                                                            alt="google pay"></div>
+
+
+                </div>
+                <!--
+
+              <div>Выгодные акции, интересные новинки и полезные советы</div>
+              <div><input type="text" value="" name="name" placeholder="Ваше имя"></div>
+              <div><input type="text" value="" name="mail" placeholder="Ваша почта"></div>
+              <div><button type="text" class="z2-orange-btn" value="" name="mail">Подписаться</button></div>
+              -->
+            </div>
+        </div>
+        <div class="z2-footer-btn">
+            © 2010 - 2023 Інтернет-зоомагазин Pethouse<br>
+            Всі права захищені. Передрук, відтворення та використання матеріалів дозволяється лише за умови посилання на
+            https://pethouse.ua
+
+        </div>
+
+    </div>
+    <style>
+        /* Загальні стилі для контейнера футера */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.container {
+    display: flex;
+
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Стилі для кожного стовпця у футері */
+.z2-footer-col {
+    width: 25%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.z2-footer-bold {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.z2-footer-col a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.z2-footer-col a:hover {
+    color: #f1c40f; /* Змініть цей колір на бажаний колір при наведенні */
+}
+
+/* Стилі для контактів та соціальних іконок */
+.ph-bubble-items img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* Стилі для кнопок оплати */
+.pservice img {
+    width: 24px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* Стилі для тексту внизу футера */
+.z2-footer-btn {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Роздільна лінія між стовпцями */
+.z2-footer-col:not(:last-child) {
+    border-right: 1px solid #555;
+}
+
+/* Роздільна лінія внизу футера */
+.z2-footer-btn::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #555;
+    margin: 15px auto;
+}
+
+/* Медіа-запит для респонсивного дизайну */
+@media (max-width: 768px) {
+    .z2-footer-col {
+        width: 50%;
+    }
+
+    .z2-footer-col:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid #555;
+    }
+
+    .z2-footer-btn::before {
+        margin: 10px auto;
+    }
+}
+    </style>
+
+</footer>

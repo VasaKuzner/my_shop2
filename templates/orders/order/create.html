@@ -1,0 +1,122 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+     <script  src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <h1>Checkout</h1>
+    <h3>Твої замовлення</h3>
+    <div class="order-info">
+        <ul>
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>${{ item.total_price }}</span>
+                </li>
+            {% endfor %}
+             <li>Total: ${{ cart.get_total_price }}</li>
+        </ul>
+    </div>
+
+
+
+    <form action="." method="post" class="order-form">
+
+
+            <div class="form-field" >
+
+                 {{ form.first_name }}
+             </div>
+            <div class="form-field" >
+                 {{ form.last_name }}
+             </div>
+            <div class="form-field" >
+                 {{ form.surname }}
+             </div>
+            <div class="form-field" >
+                 {{ form.email }}
+             </div>
+            <div class="form-field" >
+                 {{ form.phonenumb }}
+             </div>
+
+            <div class="form-field" >
+                 {{ form.adres_past }}
+             </div>
+
+               <div class="form-field" >
+                {{ form.address }}
+               </div>
+
+
+
+       <p><input  type="submit" name="submit" value="відправити замовлення "></p>
+         {% csrf_token %}
+    </form>
+
+<script>
+
+$(document).ready(function() {
+    $('.adres-past-load').select2({
+        language: {
+            inputTooShort: function() {
+                return "Введіть щонайменше дві букви";
+            },
+            noResults: function() {
+                return " ";
+            }
+        }
+    });
+});
+
+ $(document).ready(function() {
+            $('.address-load').select2({
+
+                ajax: {
+                    url: 'https://api.novaposhta.ua/v2.0/json/',
+                    type: 'POST',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return JSON.stringify({
+                            apiKey: "86d1f8ea6e378564cde4337f24dda1c2",
+                            modelName: "Address",
+                            calledMethod: "getSettlements",
+                            methodProperties: {
+                                FindByString: params.term,
+
+                            },
+                        });
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.data.map(function(settlement) {
+                                return {
+                                    id: settlement.Ref,
+                                    text: settlement.Description + ", " + settlement.RegionsDescription + " , " + settlement.AreaDescription
+                                };
+                            })
+                        };
+                    }
+                },
+                        minimumInputLength: 2,
+        language: {
+            inputTooShort: function() {
+                return "Введіть щонайменше дві букви";
+            },
+            noResults: function() {
+                return "Нічого не знайдено ";
+            }
+        }
+    });
+
+
+});
+
+</script>
+
+{% endblock %}
+ <!--                <label class="form-laba" for="{{ form.adres_past.id_for_label }}" > {{ form.adres_past.label }}:  </label> {{ form.adres_past }}-->

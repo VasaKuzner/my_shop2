@@ -1,0 +1,54 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+      Ваш кошик для покупок
+{% endblock %}
+{% block content %}
+    <h1>Ваш кошик для покупок</h1>
+    <table class="cart">
+        <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Розмір </th>
+            <th style="width: 300px " >Назва продукту </th>
+            <th>кількість </th>
+            <th>Видалити </th>
+            <th>Ціна за одиницю </th>
+            <th>Ціна </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+
+
+            {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{% url 'shop:product_detail' item.product.id item.product.slug %}" > <img  src= "{{ product.picture1 }}"></a>
+                    </td>
+                    <td class="num"  > {{ item.size }}</td>
+                    <td><a href="{% url 'shop:product_detail' item.product.id item.product.slug %}">{{ product.name }}</a></td>
+                    <td>{{ item.quantity }}</td>
+                    <td><a href="{% url 'cart:cart_remove' product.id%}">Видалити </a></td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="5"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url 'shop:product_list' %}" class="button light">Продовжити покупки </a>
+        <a href="{% url 'orders:order_create' %}" class="button">
+    Купити 
+</a>
+    </p>
+
+
+
+{% endblock %}
